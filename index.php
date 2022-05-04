@@ -51,8 +51,6 @@
         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Cities</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
 
-<form action="" id="cityForm">
-<input id = "cityInput" type="text" name="city" value="" hidden>
            <?php
             include_once("db_connect.php");
             if ($conn->connect_error) {
@@ -67,13 +65,12 @@
               while($row = $result->fetch_assoc()) {
                 echo "<li><a href='#' onclick='filterByCity(this)' name=" . $row["city_name"] . ">". $row["city_name"] ."</a></li>";
               }
-            } else {
+            } 
+            else {
             
             }
             $conn->close();
             ?>
-
-</form>
 
         </ul>
       </li>
@@ -88,6 +85,7 @@
                             </button>
     </div>
     <div class="container" style="min-height:500px;">
+
     <title>311 Data : Filter and Search through 311 Data</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>  
@@ -106,6 +104,10 @@
 				<th data-column-id="call_zip">Zip Code</th>
 				<th data-column-id="call_dist">District</th>
 				<th data-column-id="call_case_owner">Case Owner</th>
+        <th data-column-id="call_street_address">Street Address</th>
+				<th data-column-id="call_state">State</th>
+        <th data-column-id="call_year_month">Created Year Month</th>
+        <th data-column-id="call_ticket_status">Ticket Status</th>
 			</tr>
 		</thead>
 	</table>	
@@ -124,15 +126,16 @@
             function filterByCity(city){
             var formData = new FormData();
             formData.append('tableName', city.name);
-            // console.log(formData.get('tableName'));
+            console.log(formData.get('tableName'));
 
-              $("#calls").bootgrid({
-                ajax: true,	
+      $("#calls").bootgrid({
+                ajax: true,
 		            url: "search.php",
                 data: formData,
-                // cache: false,
                 type: "POST",
+                cache: false,
                 post: function(data){
+                  
                   return{
                     tableName: city.name,
                   };
@@ -140,17 +143,19 @@
             });
             }
 
-// SEARCH
-//       $(document).ready(function() {
+
+// SIDEBAR
+      $(document).ready(function() {
 //         $("#calls").bootgrid({	
 //           ajax: true,	
 //           url: "fetch_data.php"	
 //         });
-//         $("#sidebarCollapse").on("click", function() {
-//           $("#sidebar").toggleClass("active");
-//           $(this).toggleClass("active");
-//         });
-// });
+        $("#sidebarCollapse").on("click", function() {
+          $("#sidebar").toggleClass("active");
+          $(this).toggleClass("active");
+        });
+});
+
 
     </script>
 

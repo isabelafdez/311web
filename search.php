@@ -29,7 +29,8 @@ $start = ($page-1) * $limit;
 if (isset($_POST['tableName'])){
     $tableName = $_POST['tableName'];
 
-    $sql_query = "SELECT ticket_id as call_ticketId, issue_type as call_issueType, city as call_city, ticket_year as call_year, zip_code as call_zip, neighborhood_district as call_dist, case_owner as call_case_owner FROM $tableName ";
+    $sql_query = "SELECT ticket_id as call_ticketId, issue_type as call_issueType, city as call_city, ticket_year as call_year, zip_code as call_zip, neighborhood_district as call_dist, case_owner as call_case_owner,
+    street_address as call_street_address, state as call_state, created_year_month as call_year_month, ticket_status as call_ticket_status FROM $tableName ";
 
     $total_call_sql .= $sql_query;
     $call_sql .= $sql_query;

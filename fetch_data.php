@@ -36,7 +36,8 @@ if(!empty($post['searchPhrase'])) {
 if( !empty($post['sort']) ) {  
 	$where_condition .=" ORDER By ".key($post['sort']) .' '.current($post['sort'])." ";
 }
-$sql_query = "SELECT ticket_id as call_ticketId, issue_type as call_issueType, city as call_city, ticket_year as call_year, zip_code as call_zip, neighborhood_district as call_dist, case_owner as call_case_owner FROM `miami` ";
+$sql_query = "SELECT ticket_id as call_ticketId, issue_type as call_issueType, city as call_city, ticket_year as call_year, zip_code as call_zip, neighborhood_district as call_dist, case_owner as call_case_owner,
+street_address as call_street_address, state as call_state, created_year_month as call_year_month, ticket_status as call_ticket_status FROM `miami` ";
 
 $total_call_sql .= $sql_query;
 $call_sql .= $sql_query;
